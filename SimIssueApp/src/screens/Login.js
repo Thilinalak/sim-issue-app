@@ -1,38 +1,37 @@
 import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { StyleSheet, View ,Text, SafeAreaView,} from 'react-native'
-import { MyButton } from '../components/MyButton'
+import {Button } from '../components/Button'
 import { MyTextInput } from '../components/MyTextInput'
 
 
 
 const Login = () => {
 
-
-    const Navigate = useNavigation()
+    const Navigation = useNavigation()
 
     const gotoRegister = ()=>{
-        Navigate.navigate('Register')
+        Navigation.navigate('Register')
     }
     const signIn = ()=>{
-        
+        Navigation.navigate('ScreenContainer')
     }
 
   return (
-        <View style={style.container}>
-            <Text style={style.textStyle}>Login</Text>
-            <View style={style.contentCenter}>
-            <MyTextInput name='username' keyboardType={'email-address'} placeholder={'Username'} />
-            <MyTextInput name='password' secureTextEntry={true} placeholder={'Password'} />
-            <MyButton color={'blue'} title={'SignIn'} onPress={signIn}/>
-            <MyButton color={'red'} title={'SignUp'} onPress={gotoRegister}/>
+        <View style={styles.container}>
+            <Text style={styles.textStyle}>Login</Text>
+            <View style={styles.contentCenter}>
+                <MyTextInput name='username' keyboardType={'email-address'} placeholder={'Username'} />
+                <MyTextInput name='password' secureTextEntry={true} placeholder={'Password'} />
+                <Button color={'blue'} title={'SignIn'} onPress={signIn}/>
+                <Button color={'red'} title={'SignUp'} onPress={gotoRegister}/>
             </View>
             
         </View>
   )
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
     container:{
         backgroundColor:'#eff556' ,
         flex:1,

@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { StyleSheet, View ,Text, SafeAreaView,} from 'react-native'
-import { MyButton } from '../components/MyButton'
+import { Button } from '../components/Button'
 import { MyTextInput } from '../components/MyTextInput'
 
 
@@ -26,7 +26,7 @@ const Register = () => {
                 <Text style={style.text}>Password</Text>
                 <MyTextInput name='password1' secureTextEntry={true} placeholder={'Password'} />
                 <MyTextInput name='password2' secureTextEntry={true} placeholder={'Re-enter Password'} />
-                <MyButton color={'red'} title={'SignUp'} onPress={register}/>
+                <Button color={'red'} title={'SignUp'} onPress={register}/>
             </View>
             
         </View>
