@@ -3,12 +3,12 @@ import React from 'react'
 import { StyleSheet, View ,Text, SafeAreaView,} from 'react-native'
 import { Button } from '../components/Button'
 import { MyTextInput } from '../components/MyTextInput'
-
+import { useTranslation} from 'react-i18next' 
 
 
 const Register = () => {
 
-
+    const {t,i18n} = useTranslation()
     const Navigate = useNavigation()
     
     const register = ()=>{
@@ -17,16 +17,16 @@ const Register = () => {
 
   return (
         <View style={style.container}>
-            <Text style={style.textStyle}>Register</Text>
+            <Text style={style.textStyle}>{t('registertext')}</Text>
             <View style={style.contentCenter}>
-            <Text style={style.text}>Details</Text>
-                <MyTextInput name='fullname' placeholder={'Full Name'} />
-                <MyTextInput name='email'keyboardType={'email-address'} placeholder={'Email'} />
-                <MyTextInput name='mobile'keyboardType={'numeric'} placeholder={'Mobile'} />
-                <Text style={style.text}>Password</Text>
-                <MyTextInput name='password1' secureTextEntry={true} placeholder={'Password'} />
-                <MyTextInput name='password2' secureTextEntry={true} placeholder={'Re-enter Password'} />
-                <Button color={'red'} title={'SignUp'} onPress={register}/>
+            <Text style={style.text}>{t('details')}</Text>
+                <MyTextInput name='fullname' placeholder={t('full name')} />
+                <MyTextInput name='email'keyboardType={'email-address'} placeholder={t('email')} />
+                <MyTextInput name='mobile'keyboardType={'numeric'} placeholder={t('mobile')} />
+                <Text style={style.text}>{t('password')}</Text>
+                <MyTextInput name='password1' secureTextEntry={true} placeholder={t('password')} />
+                <MyTextInput name='password2' secureTextEntry={true} placeholder={t('re-enter password')} />
+                <Button color={'red'} title={t('signup')} onPress={register}/>
             </View>
             
         </View>

@@ -1,19 +1,23 @@
 import React, {useState} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Modal} from 'react-native';
 import {Header} from '../components/Header';
-import {SignOutModel} from '../components/SignOutModel';
-import { ChnageLanguageModal } from '../components/ChnageLanguageModal';
+import {SignOutModal} from '../components/SignOutModal';
+import { ChangeLanguageModal } from '../components/ChangeLanguageModal';
+import { useTranslation } from 'react-i18next';
 
 export const UserScreen = () => {
-  const [isSignOutModelVisible, SetIsSignOutModelVisible] = useState(false);
-  const [ischangeLanguageModelVisible, SetIschangeLanguageModelVisible] =
+
+  const {t,i18n} =  useTranslation()
+
+  const [isSignOutModalVisible, SetIsSignOutModalVisible] = useState(false);
+  const [ischangeLanguageModalVisible, SetIschangeLanguageModalVisible] =
     useState(false);
 
-  const signOutModelVisible = bool => {
-    SetIsSignOutModelVisible(bool);
+  const signOutModalVisible = bool => {
+    SetIsSignOutModalVisible(bool);
   };
-  const changeLanguageModelVisible = bool => {
-    SetIschangeLanguageModelVisible(bool);
+  const changeLanguageModalVisible = bool => {
+    SetIschangeLanguageModalVisible(bool);
   };
 
   return (
@@ -22,32 +26,32 @@ export const UserScreen = () => {
         <Header />
       </View>
       <View style={styles.container2}>
-        <Text style={styles.textStyle}>User</Text>
+        <Text style={styles.textStyle}>{t('user2')}</Text>
         <View style={styles.container3}>
 
 
-          <TouchableOpacity onPress={()=>changeLanguageModelVisible(true)} style={styles.square}>
-            <Text style={styles.text}>Change Language</Text>
+          <TouchableOpacity onPress={()=>changeLanguageModalVisible(true)} style={styles.square}>
+            <Text style={styles.text}>{t('change language')}</Text>
           </TouchableOpacity>
           <Modal
           transparent={true}
           animationType='fade'
-          visible={ischangeLanguageModelVisible}
-          onValueChange={()=>changeLanguageModelVisible(false)} >
-            <ChnageLanguageModal/>
+          visible={ischangeLanguageModalVisible}
+          onValueChange={()=>changeLanguageModalVisible(false)} >
+            <ChangeLanguageModal changeLanguageModalVisible={changeLanguageModalVisible}/>
           </Modal>
 
           <TouchableOpacity
-            onPress={() => signOutModelVisible(true)}
+            onPress={() => signOutModalVisible(true)}
             style={styles.square}>
-            <Text style={styles.text}>SignOut</Text>
+            <Text style={styles.text}>{t('logout')}</Text>
           </TouchableOpacity>
           <Modal
             transparent={true}
-            onValueChange={() => signOutModelVisible(false)}
+            onValueChange={() => signOutModalVisible(false)}
             animationType="fade"
-            visible={isSignOutModelVisible}>
-            <SignOutModel signOutModelVisible={signOutModelVisible} />
+            visible={isSignOutModalVisible}>
+            <SignOutModal signOutModalVisible={signOutModalVisible} />
           </Modal>
         </View>
       </View>
@@ -67,10 +71,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   square: {
+    paddingLeft :50,
     borderWidth: 1.2,
     backgroundColor: '#cab3f5',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
     width: window.width,
     height: 70,
   },

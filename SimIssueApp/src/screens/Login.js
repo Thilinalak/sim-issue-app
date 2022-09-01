@@ -3,11 +3,12 @@ import React from 'react'
 import { StyleSheet, View ,Text, SafeAreaView,} from 'react-native'
 import {Button } from '../components/Button'
 import { MyTextInput } from '../components/MyTextInput'
-
+import { useTranslation } from 'react-i18next';
 
 
 const Login = () => {
 
+    const {t,i18n} = useTranslation()
     const Navigation = useNavigation()
 
     const gotoRegister = ()=>{
@@ -19,12 +20,12 @@ const Login = () => {
 
   return (
         <View style={styles.container}>
-            <Text style={styles.textStyle}>Login</Text>
+            <Text style={styles.textStyle}>{t('logintext')}</Text>
             <View style={styles.contentCenter}>
-                <MyTextInput name='username' keyboardType={'email-address'} placeholder={'Username'} />
-                <MyTextInput name='password' secureTextEntry={true} placeholder={'Password'} />
-                <Button color={'blue'} title={'SignIn'} onPress={signIn}/>
-                <Button color={'red'} title={'SignUp'} onPress={gotoRegister}/>
+                <MyTextInput name='username' keyboardType={'email-address'} placeholder={t('email')} />
+                <MyTextInput name='password' secureTextEntry={true} placeholder={t('password')}/>
+                <Button color={'blue'} title={t('signin')} onPress={signIn}/>
+                <Button color={'red'} title={t('register here')} onPress={gotoRegister}/>
             </View>
             
         </View>

@@ -1,0 +1,41 @@
+{
+
+  "translation":{
+
+    "logintext":"ඇතුල්වීම",
+    "email":"විද්යුත් තැපෑල් ලිපිනය",
+    "password":"මුරපදය",
+    "signin":"ඇතුල් වන්න",
+    "register here":"ලියාපදිංචි වන්න",
+
+    "registertext":"ලියාපදිංචිවීම",
+    "details":"ඔබේ තොරතුරු ඇතුලත් කරන්න",
+    "full name":"සම්පූර්ණ නම",
+    "mobile":"දුරකථන අංකය",
+    "re-enter password":"මුරපදය යළි ඇතුළු කරන්න",
+    "signup":"ලියාපදිංචි කරන්න",
+
+    "hello" :"සුබ දවසක්",
+    "home" :"ප්‍රධාන",
+    "notification" :"නිවේදන",
+    "user" :"වෙනත්",
+
+    "ongoingqueue" :"ඔබගේ පෝලිම් අංකය,",
+    "New Sim Request" :"නව සිම් පතක්",  
+    "Sim Not Working" :"සිම් පත වැඩ නැත",  
+    "Sim Registraion" :"සිම් පතක් ලියාපදිංචිය ",  
+    "Other" :"වෙනත්",  
+
+    "issue type": "ගැටලු වර්ගය",
+    "remark": "අදහස් දැක්වීම",
+    "add issue here": "ඔබේ අදහස මෙහි එක් කරන්න",
+    "submit": "ඉදිරිපත් කරන්න",
+
+    "notification2": "දැනුම්දීම්",
+
+    "user2": "පරිශීලක",
+    "change language": "භාෂාව වෙනස් කීරීම",
+    "select language": "භාෂාව තෝරන්න",
+    "logout": "පිටවීම"
+  }
+}

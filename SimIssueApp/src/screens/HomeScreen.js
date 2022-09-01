@@ -3,10 +3,12 @@ import {Text, View, Image, StyleSheet, TouchableOpacity, Alert} from 'react-nati
 import {Header} from '../components/Header';
 import { Card } from '../components/Card';
 import { useNavigation } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
 
 export const HomeScreen = () => {
 
   const Navigation = useNavigation()
+  const { t, i18n } = useTranslation();
 
   const addIssue = (type)=>{
       Navigation.navigate('AddIssueScreen')
@@ -18,7 +20,7 @@ export const HomeScreen = () => {
         <Header />
       </View>
       <View style={styles.container2}>
-        <Text style={styles.textStyle}>Your ongoing queue No is, </Text>
+        <Text style={styles.textStyle}>{t('ongoingqueue')} </Text>
         <View>
           <TouchableOpacity disabled={true} style={styles.roundCircle}>
             <Text style={styles.textNumber}>20</Text>
@@ -26,12 +28,12 @@ export const HomeScreen = () => {
         </View>
       </View>
       <View style={styles.container3}>
-        <Card onPress={()=> addIssue('New sim request')} text={'New sim request'}/>
-        <Card onPress={()=>addIssue('Sim Not Working')} text={'Sim not working'}/>
+        <Card onPress={()=> addIssue('New sim request')} text={t('New Sim Request')}/>
+        <Card onPress={()=>addIssue('Sim Not Working')} text={t('Sim Not Working')}/>
       </View>
       <View style={styles.container4}>
-        <Card onPress={()=>addIssue('Sim Registration')} text={'Sim registration'}/>
-        <Card onPress={()=>addIssue('Other')} text={'Other'}/>
+        <Card onPress={()=>addIssue('Sim Registration')} text={t('Sim Registraion')}/>
+        <Card onPress={()=>addIssue('Other')} text={t('Other')}/>
       </View>
 
     </View>

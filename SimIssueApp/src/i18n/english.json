@@ -1,0 +1,42 @@
+{
+  "translation": {
+
+    "logintext":"Login",
+    "email":"Email",
+    "password":"Passowrd",
+    "signin":"Signin",
+    "register here":"Signup",
+    
+    "registertext":"Register",
+    "details":"Details",
+    "full name":"Full name",
+    "mobile":"Mobile",
+    "re-enter password":"Re-enter password",
+    "signup":"Signup",
+
+
+    "hello": "Hello",
+    "home": "Home",
+    "notification": "Notification",
+    "user": "user",
+
+    "ongoingqueue": "Your ongoing queue No is,",
+    "New Sim Request": "New Sim Request",
+    "Sim Not Working": "Sim Not Working",
+    "Sim Registraion": "Sim Registraion",
+    "Other": "Other",
+
+    "issue type": "Issue type",
+    "remark": "Remark",
+    "add issue here": "Add your issue here",
+    "submit": "Submit",
+
+    "notification2": "Notification",
+
+    "user2": "User",
+    "change language": "Change Language",
+    "select language": "Select Language",
+    "logout": "Logout"
+
+  }
+}

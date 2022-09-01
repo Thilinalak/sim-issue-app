@@ -1,9 +1,12 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next';
 import { Text, View , StyleSheet, TouchableOpacity} from 'react-native'
 import { Header } from '../components/Header';
 import { Notification } from '../components/Notification';
 
 export const NotificationScreen = () => {
+
+  const {t,i18n } = useTranslation()
   return (
    
     <View style={styles.container}>
@@ -11,7 +14,7 @@ export const NotificationScreen = () => {
         <Header />
       </View>
       <View style={styles.container2}>
-        <Text style={styles.textStyle}>Notifications</Text>
+        <Text style={styles.textStyle}>{t('notification2')}</Text>
         <View style={styles.container3}>
             <Notification/>
         </View>

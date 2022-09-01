@@ -1,18 +1,35 @@
 import React from 'react'
 import { View ,Text,StyleSheet} from 'react-native'
 
-import { NavigationContainer, TabActions } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
 // Screens
 import {HomeScreen} from './HomeScreen'
+import { AddIssueScreen } from './AddIssueScreen';
+
 import {NotificationScreen} from './NotificationScreen'
 import {UserScreen} from './UserScreen'
 
 const Tab = createBottomTabNavigator()
+const HomeStack = createNativeStackNavigator();
+
+export const NestedScreens = () =>{
+    return(
+        <HomeStack.Navigator initialRouteName='HomeScreen' 
+        screenOptions={{
+            headerShown:false
+        }}
+        >
+            <HomeStack.Screen name='HomeScreen' component={HomeScreen}/>                
+            <HomeStack.Screen name='AddIssueScreen' component={AddIssueScreen}/>                
+        </HomeStack.Navigator>
+    )
+}
 
 export const ScreenContainer = () => {
+
   return (
         <Tab.Navigator
             initialRouteName='Home'
@@ -35,7 +52,7 @@ export const ScreenContainer = () => {
                 headerShown:false,
             })}
             >
-                <Tab.Screen name='Home' component={HomeScreen}/>
+                <Tab.Screen name='Home' component={NestedScreens}/>
                 <Tab.Screen options={{ tabBarBadge: 3 }} name='Notification' component={NotificationScreen}/>
                 <Tab.Screen name='User' component={UserScreen}/>
 
@@ -43,6 +60,10 @@ export const ScreenContainer = () => {
 
   )
 }
+
+
+
+
 const styles = StyleSheet.create({
     container:{
         backgroundColor:'#eff556' ,

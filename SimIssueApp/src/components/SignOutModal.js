@@ -1,18 +1,22 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { View, Text, StyleSheet, TouchableOpacity , Dimensions} from 'react-native'
 
-
 const WIDTH = Dimensions.get('window').width
-export const SignOutModel = (props) => {
 
-    const signOutModal =(data,bool)=>{
+export const SignOutModal = (props) => {
+
+  const {t,i18n} =  useTranslation()
+
+
+    const closeSignOutModal =(data,bool)=>{
         data !== 'Cancel'? signOut(bool) :
-        props.signOutModelVisible(bool)
+        props.signOutModalVisible(bool)
     }
 
     const signOut = (bool)=>{
         console.log("Sign Out HEre");
-        props.signOutModelVisible(bool)
+        props.signOutModalVisible(bool)
       }
 
   return (
@@ -22,10 +26,10 @@ export const SignOutModel = (props) => {
                 <Text style={styles.text}>Are sure you want to SignOut ?</Text>
                 </View>
                 <View style={styles.buttonsView}>
-                    <TouchableOpacity onPress={()=> signOutModal('Cancel',false)} style={styles.touchableOpacity}>
+                    <TouchableOpacity onPress={()=> closeSignOutModal('Cancel',false)} style={styles.touchableOpacity}>
                         <Text style={styles.textButton}>Cancel</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=> signOutModal('Yes',false)} style={styles.touchableOpacity}>
+                    <TouchableOpacity onPress={()=> closeSignOutModal('Yes',false)} style={styles.touchableOpacity}>
                         <Text style={styles.textButton}>Yes</Text>
                     </TouchableOpacity>
                 </View>

@@ -20,6 +20,7 @@ export const Button = ({
 const styles = StyleSheet.create({
   styleBtn: {
     height:40,
+    // width:150,
     backgroundColor:'#f23552',
     alignItems:'center',
     justifyContent:'center',

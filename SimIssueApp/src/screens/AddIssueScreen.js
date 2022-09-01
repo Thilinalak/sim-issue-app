@@ -2,9 +2,15 @@ import React from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, TextInput} from 'react-native';
 import {Header} from '../components/Header';
 import {Button} from '../components/Button';
+import { useTranslation } from 'react-i18next';
+import { ScreenContainer } from 'react-native-screens';
+import { createNativeStackNavigator} from '@react-navigation/native-stack'
 
 export const AddIssueScreen = () => {
 
+  const addIssueScreenStack = createNativeStackNavigator()
+
+  const {t, i18n} = useTranslation()
 
   const onSubmit = ()=>{
   }
@@ -15,7 +21,7 @@ export const AddIssueScreen = () => {
         <Header />
       </View>
       <View style={styles.container2}>
-        <Text style={styles.textStyle}>Issue Type</Text>
+        <Text style={styles.textStyle}>{t('issue type')}</Text>
         <View>
           <TouchableOpacity disabled={true} style={styles.roundCircle}>
             <Text style={styles.issueType}>Other</Text>
@@ -23,11 +29,11 @@ export const AddIssueScreen = () => {
         </View>
       </View>
       <View style={styles.container3}>
-      <Text style={styles.textStyle}>Remark</Text>
-      <TextInput style={styles.textArea} multiline={true}  numberOfLines={10}  scrollEnabled={true} maxLength={255}  placeholder='Your Issue'/>
+      <Text style={styles.textStyle}>{t('remark')}</Text>
+      <TextInput style={styles.textArea} multiline={true}  numberOfLines={10}  scrollEnabled={true} maxLength={255}  placeholder={t('add issue here')}/>
       </View>
       <View style={styles.container4}>
-        <Button title={'Submit'}/>
+        <Button title={t('submit')}/>
       </View>
 
     </View>

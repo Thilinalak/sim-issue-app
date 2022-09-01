@@ -1,7 +1,10 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import {View, Text, Image, StyleSheet} from 'react-native';
 
 export const Header = () => {
+
+  const { t, i18n } = useTranslation();
   return (
     <View style={styles.container}>
       <Image
@@ -9,7 +12,7 @@ export const Header = () => {
         source={require('../assets/images/sim-card-100.png')}
       />
       <View style={styles.txtPosition}>
-        <Text style={styles.textHello}>Hello</Text>
+        <Text style={styles.textHello}>{t('hello')}</Text>
         <Text style={styles.textName}>Thilina Lakshan</Text>
       </View>
     </View>
