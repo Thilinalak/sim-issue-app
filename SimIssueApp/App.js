@@ -35,13 +35,14 @@ import Login from './src/screens/Login';
 import Register from './src/screens/Register';
 import SplashScreen from './src/screens/SplashScreen';
 import  {ScreenContainer}  from './src/screens/ScreenContainer';
-import { AddIssueScreen } from './src/screens/AddIssueScreen';
 import i18n from './src/i18n/';
+import { ToastProvider } from 'react-native-toast-notifications';
 
 const Stack = createNativeStackNavigator();
 
 const App = () =>{
   return(
+    <ToastProvider>
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown:false}}>
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
@@ -50,9 +51,9 @@ const App = () =>{
 
         <Stack.Screen name='ScreenContainer' component={ScreenContainer}/>
         
-        {/* <Stack.Screen name='AddIssueScreen' component={AddIssueScreen}/> */}
       </Stack.Navigator>
     </NavigationContainer>
+    </ToastProvider>
   )
 }
 

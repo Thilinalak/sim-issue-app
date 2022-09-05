@@ -41,7 +41,7 @@ export const AddIssueScreen = () => {
 };
 
 const styles = StyleSheet.create({
-    textArea:{
+  textArea:{
         backgroundColor:'#ffffff',
         marginTop:20,
         borderColor: '#323aa8',
