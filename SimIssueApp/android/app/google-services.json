@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "70177699483",
+    "project_id": "simissueapp-f0474",
+    "storage_bucket": "simissueapp-f0474.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:70177699483:android:d8c80a75b9257babb7b83e",
+        "android_client_info": {
+          "package_name": "com.simissueapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "70177699483-8hn2o70lt1q46mut895vha5qerhmukr7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpgw5WkmDyfbkLk22Ai8Kzn626f4aWRIg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "70177699483-8hn2o70lt1q46mut895vha5qerhmukr7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

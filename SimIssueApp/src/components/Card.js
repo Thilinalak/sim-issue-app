@@ -1,8 +1,8 @@
 import React from 'react'
-import { TouchableOpacity, View ,Text, StyleSheet} from 'react-native'
+import { TouchableOpacity, View ,Text, StyleSheet, Dimensions} from 'react-native'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
-export const Card = ({text, icon, onPress}) => {
+export const Card = ({text, onPress}) => {
   return (
     <View>
         <TouchableOpacity onPress={onPress} style={styles.card}>
@@ -14,8 +14,8 @@ export const Card = ({text, icon, onPress}) => {
 
   const styles = StyleSheet.create({
     card: {
-        width:165,
-        height:165,
+        width: Dimensions.get('window').width - 270,
+        height:Dimensions.get('window').height - 620,
         backgroundColor:'#cc8cfa',
         alignItems:'center',
         justifyContent:'center',

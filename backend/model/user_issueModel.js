@@ -1,7 +1,11 @@
 module.exports = (sequelize,DataTypes)=>{
 
     const UserIssues = sequelize.define('user_issues',{
-
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+          },
         issue:{
             type:DataTypes.STRING,
             allowNull:false
@@ -14,8 +18,6 @@ module.exports = (sequelize,DataTypes)=>{
             type:DataTypes.BOOLEAN,
             allowNull:false
         },
-    },{
-        timestamps:false
-    })
+    },)
     return UserIssues
 }

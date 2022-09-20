@@ -1,11 +1,12 @@
 import { useNavigation } from '@react-navigation/native'
 import  React,{useState} from 'react'
-import { StyleSheet, View ,Text, SafeAreaView,TextInput} from 'react-native'
+import { StyleSheet, View ,Text, SafeAreaView,TextInput,} from 'react-native'
 import {Button } from '../components/Button'
 import { MyTextInput } from '../components/MyTextInput'
 import { useTranslation } from 'react-i18next';
 import axios from 'axios'
 import { useToast } from "react-native-toast-notifications";
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
 const Login = () => {
@@ -15,14 +16,14 @@ const Login = () => {
     const toast = useToast()
 
     const [username, setUsername] = useState('')
-    const [passowrd, setPassword] = useState('')
+    const [password, setPassword] = useState('')
 
     const gotoRegister = ()=>{
         Navigation.navigate('Register')
     }
     const signIn = ()=>{
 
-        if(username.trim().length == 0 || passowrd.trim().length == 0){
+        if(username.trim().length == 0 || password.trim().length == 0){
             toast.show("Both Fields are Required !", {
                 type: "danger",
                 placement: "bottom",
@@ -32,14 +33,44 @@ const Login = () => {
               });
         }else{
 
-        axios.post('http://localhost:5000/api/users/login',{username,passowrd})
-        .then(res =>{
-            console.log(res.data);
-        })
+        axios.post('http://172.23.214.206:5000/api/users/login',{username,password})
+        .then(async(res) =>{
+
+            if (!res.data.Error) {
+
+                try {
+                  const userData = {
+                    user: res.data.user,
+                    userToken: res.data.userToken,
+                  }
+                  console.log(res.data.userToken);
+                  await AsyncStorage.setItem('userData', JSON.stringify(userData))
+                  toast.show(res.data.message, {
+                    type: 'success',
+                    placement: 'bottom',
+                    duration: 4000,
+                    offset: 30,
+                    animationType: 'slide-in',
+                  });
+          Navigation.navigate('ScreenContainer')
+
+                } catch (error) {
+                  console.log(error);
+                }
+                
+              } else {
+                toast.show(res.data.Error, {
+                  type: 'danger',
+                  placement: 'bottom',
+                  duration: 4000,
+                  offset: 30,
+                  animationType: 'slide-in',
+                });
+              }
+            })
         .catch(err => console.log(err))
             
         }
-        // Navigation.navigate('ScreenContainer')
     }
 
   return (

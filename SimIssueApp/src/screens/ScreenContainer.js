@@ -44,7 +44,6 @@ export const ScreenContainer = () => {
                     }else if (route.name === 'User'){
                         iconName = focused ? 'person' : 'person-outline'
                     }
-
                     return <Ionicons name={iconName} size={size} color={color}/>
                 },
                 tabBarActiveTintColor: 'tomato',
@@ -53,15 +52,13 @@ export const ScreenContainer = () => {
             })}
             >
                 <Tab.Screen name='Home' component={NestedScreens}/>
-                <Tab.Screen options={{ tabBarBadge: 3 }} name='Notification' component={NotificationScreen}/>
+                <Tab.Screen options={{ tabBarBadge: 2 }} name='Notification' component={NotificationScreen}/>
                 <Tab.Screen name='User' component={UserScreen}/>
 
         </Tab.Navigator>
 
   )
 }
-
-
 
 
 const styles = StyleSheet.create({

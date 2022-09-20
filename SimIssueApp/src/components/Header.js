@@ -1,9 +1,19 @@
-import React from 'react';
+import React,{useEffect, useState} from 'react';
 import { useTranslation } from 'react-i18next';
 import {View, Text, Image, StyleSheet} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const Header = () => {
 
+  useEffect(()=>{
+      const getUserInfo =async()=>{
+        const userData = JSON.parse(await AsyncStorage.getItem('userData')) 
+        setFullName(userData.user.fullname)
+      }
+      getUserInfo()
+  },[])
+
+  const [fullname, setFullName] = useState()
   const { t, i18n } = useTranslation();
   return (
     <View style={styles.container}>
@@ -13,7 +23,7 @@ export const Header = () => {
       />
       <View style={styles.txtPosition}>
         <Text style={styles.textHello}>{t('hello')}</Text>
-        <Text style={styles.textName}>Thilina Lakshan</Text>
+        <Text style={styles.textName}>{fullname}</Text>
       </View>
     </View>
   );

@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React,{useEffect} from 'react';
 // import type {Node} from 'react';
 // import {
 //   SafeAreaView,
@@ -30,7 +30,7 @@ import React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
+import { requestUserPermission, NotificationListner } from './src/notification/push_notification_helper'
 import Login from './src/screens/Login';
 import Register from './src/screens/Register';
 import SplashScreen from './src/screens/SplashScreen';
@@ -41,6 +41,11 @@ import { ToastProvider } from 'react-native-toast-notifications';
 const Stack = createNativeStackNavigator();
 
 const App = () =>{
+
+  useEffect(()=>{
+    requestUserPermission()
+    NotificationListner()
+  },[])
   return(
     <ToastProvider>
     <NavigationContainer>

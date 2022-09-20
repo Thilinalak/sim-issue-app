@@ -30,21 +30,21 @@ db.userIssues = require('./user_issueModel')(sequelize,DataTypes)
 db.notifications  = require('./notificationModel')(sequelize,DataTypes)
 
 db.sequelize.sync({force:false})
-.then(()=> console.log('yes re-sync done'))
+.then(()=> console.log('re-sync done'))
 
 
 // M:M Relation (user : issueTypes)
-db.users.belongsToMany(db.issueTypes,{through : db.userIssues})
-db.issueTypes.belongsToMany(db.users,{through :db.userIssues})
+db.users.hasMany(db.userIssues)
+db.userIssues.belongsTo(db.users)
+
+db.issueTypes.hasMany(db.userIssues)
+db.userIssues.belongsTo(db.issueTypes)
 
 
 // 1:M Relation (userIssues has many notification)
- db.users.hasMany(db.notifications)
- db.notifications.belongsTo(db.users,)
- db.issueTypes.hasMany(db.notifications)
- db.notifications.belongsTo(db.issueTypes,)
+ db.userIssues.hasMany(db.notifications)
+ db.notifications.belongsTo(db.userIssues);
 
-//  db.userIssues.hasMany(db.notifications)
-//  db.notifications.belongsTo(db.userIssues);
+
 module.exports = db
 

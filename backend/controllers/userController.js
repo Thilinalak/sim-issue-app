@@ -9,6 +9,9 @@ const User = db.users;
 // @Roote   api/users/register
 exports.registerUser = async (req, res) => {
   const { fullname, mobile, email, password1 } = req.body;
+    console.log('got Request');
+    console.log(req.body);
+    // res.json({ok:'ok'})
 
   // Check user already exsits in db
   const userExsits = await User.findOne({
@@ -16,10 +19,10 @@ exports.registerUser = async (req, res) => {
   })
 
   if(userExsits){
-    res.status(400).json({Error: 'User Already Exsits !'})
+    res.status(200).json({Error: 'User Already Exsits !'})
   }else{
     // Hashing password
-    const hashedPassword = await bcrypt.hash(password1, await bcrypt.genSalt(10))
+    const hashedPassword = await bcrypt.hash(password1,await bcrypt.genSalt(10))
 
     // Register new user
     const newUser = await User.create({
@@ -30,18 +33,17 @@ exports.registerUser = async (req, res) => {
     })
 
     if(newUser){
-        const registeredUserInfo = await findOne({
+        const registeredUserInfo = await User.findOne({
             where:{id: newUser.id},
             attributes:{exclude: ['password']}
         })
-
         res.status(201).json({
             message: 'User Registered Successfully !',
             user: registeredUserInfo,
             userToken: generateToken(newUser.id, newUser.fullname)
         })
     }else{
-        res.status(400).json({ Error: "User Not Registerd !" });
+        res.status(200).json({ Error: "User Not Registerd !" });
     }
   }
 };
@@ -51,13 +53,16 @@ exports.registerUser = async (req, res) => {
 // @Roote   api/users/login
 exports.loginUser = async(req, res)=>{
     const {username, password} = req.body
-   
+    console.log('got request');
+    console.log(req.body);
+    // res.json({ok:'ok'})
+
     // Check user from DB
     const user = await User.findOne({
         where:{email: username}
     })
     if(user && (await bcrypt.compare(password,user.password))){
-        const userInfo = await findOne({
+        const userInfo = await User.findOne({
             where :{id: user.id},
             attributes:{exclude: ['password']}
         })
@@ -68,12 +73,12 @@ exports.loginUser = async(req, res)=>{
             userToken : generateToken(user.id, user.fullname)
         })
     }else{
-        res.status(400).json({Error: 'Invalid Credentials !'})
+        res.status(200).json({Error: 'Invalid Credentials !'})
     }
 }
 
 
 // Generate JWT
 const generateToken =(id, fullname) =>{
-    return jwt.sign({id,fullname},process.env.JWT_SECRET,{expireIn:'30d'})
+    return jwt.sign({id,fullname},process.env.JWT_SECRET,{expiresIn:'30d'})
 }

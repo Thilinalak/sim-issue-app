@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   styleBtn: {
     height:40,
     // width:150,
-    backgroundColor:'#f23552',
+    backgroundColor:'blue',
     alignItems:'center',
     justifyContent:'center',
     borderRadius:25,

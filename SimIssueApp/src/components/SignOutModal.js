@@ -1,12 +1,17 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { useNavigation} from '@react-navigation/native'
 import { View, Text, StyleSheet, TouchableOpacity , Dimensions} from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const WIDTH = Dimensions.get('window').width
 
 export const SignOutModal = (props) => {
 
+
+
   const {t,i18n} =  useTranslation()
+  const navigation =  useNavigation()
 
 
     const closeSignOutModal =(data,bool)=>{
@@ -14,8 +19,14 @@ export const SignOutModal = (props) => {
         props.signOutModalVisible(bool)
     }
 
-    const signOut = (bool)=>{
-        console.log("Sign Out HEre");
+    const signOut = async(bool)=>{
+        try {
+
+            await AsyncStorage.removeItem('userData')
+            navigation.navigate('Login')
+        } catch (err) {
+            console.log(err);
+        }
         props.signOutModalVisible(bool)
       }
 
