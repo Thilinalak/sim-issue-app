@@ -14,18 +14,12 @@ exports.requestUserPermission = async () => {
 };
 
 const getFCMToken = async () => {
-  let fcmToken = await AsyncStorage.getItem('fcmToken')
-  console.log('Old Token ',fcmToken);
-
-  
+ 
     try {
       let fcmtokenn = await messaging().getToken();
-      console.log('nnnew token ', fcmtokenn);
+      await AsyncStorage.setItem('fcmToken', fcmtokenn);
+      console.log('new message token ', fcmtokenn);
 
-      if (fcmtokenn) {
-        console.log('new Token ', fcmtokenn);
-        await AsyncStorage.setItem('fcmToken', fcmtokenn);
-      }
     } catch (err) {
       console.log(err);
     }

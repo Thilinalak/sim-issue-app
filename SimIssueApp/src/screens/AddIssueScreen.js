@@ -45,11 +45,13 @@ export const AddIssueScreen = ({route}) => {
       try {
         const userData = JSON.parse(await AsyncStorage.getItem('userData'));
         await axios
-          .post(`http://172.23.214.206:5000/api/issues/add-issue`, {
+          .post(`http://172.22.22.98:5000/api/issues/add-issue`, {
             userId: userData.user.id,
             issueTypeId,
             issue,
-          })
+          },{'headers':{
+            Authorization: `Bearer ${userData.userToken}`
+          }})
           .then(async(res) => {
             
             if (!res.data.error) {

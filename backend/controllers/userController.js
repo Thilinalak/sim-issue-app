@@ -53,10 +53,7 @@ exports.registerUser = async (req, res) => {
 // @Roote   api/users/login
 exports.loginUser = async(req, res)=>{
     const {username, password} = req.body
-    console.log('got request');
-    console.log(req.body);
-    // res.json({ok:'ok'})
-
+    
     // Check user from DB
     const user = await User.findOne({
         where:{email: username}

@@ -15,7 +15,7 @@ export const SignOutModal = (props) => {
 
 
     const closeSignOutModal =(data,bool)=>{
-        data !== 'Cancel'? signOut(bool) :
+        data !== 'no'? signOut(bool) :
         props.signOutModalVisible(bool)
     }
 
@@ -34,14 +34,14 @@ export const SignOutModal = (props) => {
         <TouchableOpacity disabled={true} style={styles.container} >
             <View style={styles.modal}>
                 <View  style={styles.textView}>
-                <Text style={styles.text}>Are sure you want to SignOut ?</Text>
+                <Text style={styles.text}>{t('are you sure you want to signout')}</Text>
                 </View>
                 <View style={styles.buttonsView}>
-                    <TouchableOpacity onPress={()=> closeSignOutModal('Cancel',false)} style={styles.touchableOpacity}>
-                        <Text style={styles.textButton}>Cancel</Text>
+                    <TouchableOpacity onPress={()=> closeSignOutModal('no',false)} style={styles.touchableOpacity}>
+                        <Text style={styles.textButton}>{t('no')}</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=> closeSignOutModal('Yes',false)} style={styles.touchableOpacity}>
-                        <Text style={styles.textButton}>Yes</Text>
+                    <TouchableOpacity onPress={()=> closeSignOutModal('yes',false)} style={styles.touchableOpacity}>
+                        <Text style={styles.textButton}>{t('yes')}</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -57,9 +57,9 @@ const styles = StyleSheet.create({
         alignContent:'center',
         justifyContent:'center',
     },modal:{
-        height: 130,
+        height: 150,
         width: WIDTH - 80,
-        paddingTop:10,
+        paddingTop:25,
         backgroundColor:'white',
     },
     textView:{

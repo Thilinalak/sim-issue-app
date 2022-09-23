@@ -43,7 +43,7 @@ const Register = () => {
       });
     } else {
       axios
-        .post('http://172.23.214.206:5000/api/users/register', {
+        .post('http://172.22.22.98:5000/api/users/register', {
           fullname,
           mobile,
           email,

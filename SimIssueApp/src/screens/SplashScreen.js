@@ -1,37 +1,42 @@
-import { useNavigation } from '@react-navigation/native'
-import React ,{ useEffect, useState } from 'react'
-import { StyleSheet, View ,Text, Image} from 'react-native'
-
+import {useNavigation} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, View, Image, Dimensions} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SplashScreen = () => {
+  const [isGo, setIsGo] = useState(true);
+  const Navigate = useNavigation();
 
-    const [isGo, setIsGo] = useState(true)
-    const Navigate = useNavigation()
-
-    useEffect(()=>{
-        if(isGo == true){
-            setTimeout(()=>{
-                Navigate.navigate('Login')
-                setIsGo(false)
-            },2000)
+  useEffect(() => {
+    if (isGo == true) {
+      setTimeout(async () => {
+        const userData = JSON.parse(await AsyncStorage.getItem('userData'));
+        if (userData) {
+          Navigate.navigate('ScreenContainer');
+          setIsGo(false);
+        } else {
+          Navigate.navigate('Login');
+          setIsGo(false);
         }
-    },[])
+      }, 500);
+    }
+  }, []);
 
   return (
-        <View style={style.contentCenter}>
-            <Image source={require('../assets/images/sim-card-100.png')} style={style.imageStyle}/>
-        </View>
-  )
-}
+    <View style={style.container}>
+      <Image 
+        source={require('../assets/images/splash_screen.png')}
+      />
+    </View>
+  );
+};
 
 const style = StyleSheet.create({
-    contentCenter:{
-        backgroundColor:'white',
-        flex:1,
-        alignContent:'center',
-        justifyContent:'center'
-    },
-    imageStyle: {width:150,height:150}
-})
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
-export default SplashScreen
+export default SplashScreen;

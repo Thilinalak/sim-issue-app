@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View, Image, StyleSheet, TouchableOpacity,Dimensions, Alert} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import {Header} from '../components/Header';
 import { Card } from '../components/Card';
 import { useNavigation } from '@react-navigation/native';
@@ -15,7 +15,7 @@ export const HomeScreen = () => {
   useEffect(()=>{
 
     const fetchData = async()=>{
-      await axios.get(`http://172.23.214.206:5000/api/issues/`)
+      await axios.get(`http:/172.22.22.98:5000/api/issues/`)
       .then(rsp =>{
         !rsp.data.Error ?
         setIussues(rsp.data)

@@ -36,7 +36,11 @@
     "user2": "User",
     "change language": "Change Language",
     "select language": "Select Language",
-    "logout": "Logout"
+    "logout": "Logout",
+    "are you sure you want to signout" : "Are sure you want to Signout ?",
+    "yes": "Yes",
+    "no": "No"
+    
 
   }
 }

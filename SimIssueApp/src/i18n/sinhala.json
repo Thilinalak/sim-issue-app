@@ -36,6 +36,9 @@
     "user2": "පරිශීලක",
     "change language": "භාෂාව වෙනස් කීරීම",
     "select language": "භාෂාව තෝරන්න",
-    "logout": "පිටවීම"
+    "logout": "පිටවීම",
+    "are you sure you want to signout" : "ඔබට පිටවීමට අවශ්‍යද?",
+    "yes": "ඔව්",
+    "no": "නැත"
   }
 }
