@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, BackHandler, Alert} from 'react-native';
 import {Header} from '../components/Header';
 import { Card } from '../components/Card';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import axios from 'axios';
@@ -12,30 +12,52 @@ export const HomeScreen = () => {
 
   const [issues, setIussues] = useState([])
   const [queueNo, setQueueNo] = useState('')
-  useEffect(()=>{
 
-    const fetchData = async()=>{
-      await axios.get(`http:/172.22.22.98:5000/api/issues/`)
-      .then(rsp =>{
-        !rsp.data.Error ?
-        setIussues(rsp.data)
-        : console.log(rsp.data.Error);
+  useFocusEffect(
+    React.useCallback(() => {
+
+      const fetchData = async()=>{
+        await axios.get(`http://10.141.101.21:5000/api/issues/`)
+        .then(rsp =>{
+          !rsp.data.Error ?
+          setIussues(rsp.data)
+          : console.log(rsp.data.Error);
+          
+        })
+        .catch(err=> console.log(err))
+        setQueueNo( JSON.parse(await AsyncStorage.getItem('queueNo')))
+      }
+
+
+      const onBackPress = () => {
         
-      })
-      .catch(err=> console.log(err))
-
-      setQueueNo( JSON.parse(await AsyncStorage.getItem('queueNo')))
-    }
-    fetchData()
-  },[setQueueNo])
+        Alert.alert("", "Are you sure you want to Exit?", [
+          {
+            text: "Cancel",
+            onPress: () => null,
+            style: "cancel"
+          },
+          { text: "YES", onPress: () => BackHandler.exitApp() }
+        ]);
+        return true;
+      };
+    
+      fetchData()
+      BackHandler.addEventListener("hardwareBackPress", onBackPress);
+    
+      return () => {
+        BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+      }
+    
+    }, [setQueueNo]));
 
   
   const toast = useToast()
   const navigation = useNavigation()
   const { t, i18n } = useTranslation();
 
-  const addIssue = (issueID , issue)=>{
-    queueNo == 0 ?
+  const addIssue = async(issueID , issue)=>{
+    queueNo == null ?
       navigation.navigate('AddIssueScreen',{issueId: issueID, issueText: issue})
       : toast.show('You have already Submitted an Issue!', {
         type: 'warning ',
@@ -44,6 +66,8 @@ export const HomeScreen = () => {
         offset: 30,
         animationType: 'slide-in',
       });
+    
+
   }
   
   return (
@@ -51,7 +75,7 @@ export const HomeScreen = () => {
       <View>
         <Header/>
       </View>
-      {queueNo > 0 ? (
+      {queueNo != null ? (
         <View style={styles.container2}>
         <Text style={styles.textStyle}>{t('ongoingqueue')} </Text>
         <View>

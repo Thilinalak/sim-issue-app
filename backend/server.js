@@ -10,10 +10,12 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 
-// user route
+//  user routes
 app.use('/api/users', require('./routes/userRoutes'))
-// // issues route
+//  issues routes
 app.use('/api/issues', require('./routes/issueRoutes'))
+//  notification routes
+app.use('/api/notifications', require('./routes/notificationRoutes'))
 
 
 app.listen(port, () => console.log(`Server Running on Port ${port}...`))

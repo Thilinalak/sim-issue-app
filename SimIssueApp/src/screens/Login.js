@@ -8,21 +8,6 @@ import {useToast} from 'react-native-toast-notifications';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = () => {
-  // const [isUser, setIsUser] = useState()
-
-  // useEffect(()=>{
-
-  //   const checkUserLogged = async()=>{
-  //     try {
-  //       const userdata  = JSON.parse(await AsyncStorage.getItem('userData'))
-  //       setIsUser(userdata)
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   }
-
-  //   checkUserLogged()
-  // },[setIsUser])
 
   const {t, i18n} = useTranslation();
   const Navigation = useNavigation();
@@ -45,7 +30,7 @@ const Login = () => {
       });
     } else {
       axios
-        .post('http://172.22.22.98:5000/api/users/login', {username, password})
+        .post('http://10.141.101.21:5000/api/users/login', {username, password})
         .then(async res => {
           if (!res.data.Error) {
             try {

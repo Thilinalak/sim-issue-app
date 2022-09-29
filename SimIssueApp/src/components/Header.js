@@ -19,7 +19,7 @@ export const Header = () => {
     <View style={styles.container}>
       <Image
         style={styles.imageStyle}
-        source={require('../assets/images/sim-card-100.png')}
+        source={require('../assets/images/logo.png')}
       />
       <View style={styles.txtPosition}>
         <Text style={styles.textHello}>{t('hello')}</Text>
@@ -48,5 +48,5 @@ const styles = StyleSheet.create({
   },
   txtPosition: {
     marginTop:7,
-    marginRight:160  },
+    marginRight:240  },
 });

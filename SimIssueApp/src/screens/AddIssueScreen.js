@@ -9,15 +9,12 @@ import {
 import {Header} from '../components/Header';
 import {Button} from '../components/Button';
 import {useTranslation} from 'react-i18next';
-import {ScreenContainer} from 'react-native-screens';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useToast} from 'react-native-toast-notifications';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
 
 export const AddIssueScreen = ({route}) => {
-  const addIssueScreenStack = createNativeStackNavigator();
 
   useEffect(() => {
     setIssueType(route.params.issueText);
@@ -45,7 +42,7 @@ export const AddIssueScreen = ({route}) => {
       try {
         const userData = JSON.parse(await AsyncStorage.getItem('userData'));
         await axios
-          .post(`http://172.22.22.98:5000/api/issues/add-issue`, {
+          .post(`http://10.141.101.21:5000/api/issues/add-issue`, {
             userId: userData.user.id,
             issueTypeId,
             issue,
@@ -53,9 +50,9 @@ export const AddIssueScreen = ({route}) => {
             Authorization: `Bearer ${userData.userToken}`
           }})
           .then(async(res) => {
-            
             if (!res.data.error) {
               await AsyncStorage.setItem('queueNo' ,JSON.stringify(res.data.queueNo))
+              await AsyncStorage.setItem('issueId' ,JSON.stringify(res.data.issueId))
               toast.show(res.data.message, {
                 type: 'success',
                 placement: 'bottom',

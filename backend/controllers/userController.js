@@ -50,7 +50,7 @@ exports.registerUser = async (req, res) => {
 
 // @Desc    Login user
 // @Method  POST
-// @Roote   api/users/login
+// @Route   api/users/login
 exports.loginUser = async(req, res)=>{
     const {username, password} = req.body
     
