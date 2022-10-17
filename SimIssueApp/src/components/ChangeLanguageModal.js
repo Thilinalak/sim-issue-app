@@ -25,7 +25,7 @@ const changeToEnglish = ()=>{
   i18n.changeLanguage('en')
   }
 const changeToSinhala = ()=>{
-  i18n.changeLanguage('sin')
+  i18n.changeLanguage('si')
   }
 
   return (

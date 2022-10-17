@@ -9,9 +9,6 @@ const User = db.users;
 // @Roote   api/users/register
 exports.registerUser = async (req, res) => {
   const { fullname, mobile, email, password1 } = req.body;
-    console.log('got Request');
-    console.log(req.body);
-    // res.json({ok:'ok'})
 
   // Check user already exsits in db
   const userExsits = await User.findOne({
@@ -19,7 +16,7 @@ exports.registerUser = async (req, res) => {
   })
 
   if(userExsits){
-    res.status(200).json({Error: 'User Already Exsits !'})
+    res.status(200).json({Error: 'user already exsits'})
   }else{
     // Hashing password
     const hashedPassword = await bcrypt.hash(password1,await bcrypt.genSalt(10))
@@ -38,12 +35,12 @@ exports.registerUser = async (req, res) => {
             attributes:{exclude: ['password']}
         })
         res.status(201).json({
-            message: 'User Registered Successfully !',
+            message: 'user registered successfully',
             user: registeredUserInfo,
             userToken: generateToken(newUser.id, newUser.fullname)
         })
     }else{
-        res.status(200).json({ Error: "User Not Registerd !" });
+        res.status(200).json({ Error: "user not registerd" });
     }
   }
 };
@@ -65,12 +62,11 @@ exports.loginUser = async(req, res)=>{
         })
 
         res.status(200).json({
-            message: "User Authenticated and Logged In !",
             user: userInfo,
             userToken : generateToken(user.id, user.fullname)
         })
     }else{
-        res.status(200).json({Error: 'Invalid Credentials !'})
+        res.status(200).json({Error: 'invalid credentials'})
     }
 }
 

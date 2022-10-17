@@ -1,13 +1,19 @@
 import React, {useState} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, Modal} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Modal,
+  Image,
+} from 'react-native';
 import {Header} from '../components/Header';
 import {SignOutModal} from '../components/SignOutModal';
-import { ChangeLanguageModal } from '../components/ChangeLanguageModal';
-import { useTranslation } from 'react-i18next';
+import {ChangeLanguageModal} from '../components/ChangeLanguageModal';
+import {useTranslation} from 'react-i18next';
 
 export const UserScreen = () => {
-
-  const {t,i18n} =  useTranslation()
+  const {t, i18n} = useTranslation();
 
   const [isSignOutModalVisible, SetIsSignOutModalVisible] = useState(false);
   const [ischangeLanguageModalVisible, SetIschangeLanguageModalVisible] =
@@ -27,25 +33,43 @@ export const UserScreen = () => {
       </View>
       <View style={styles.container2}>
         <Text style={styles.textStyle}>{t('user2')}</Text>
+        
         <View style={styles.container3}>
-
-
-          <TouchableOpacity onPress={()=>changeLanguageModalVisible(true)} style={styles.square}>
-            <Text style={styles.text}>{t('change language')}</Text>
+          
+          <TouchableOpacity
+            onPress={() => changeLanguageModalVisible(true)}
+            style={styles.square}>
+            <View style={styles.algin}>
+              <Image
+                style={{width: 45, height: 45, marginTop: 10}}
+                source={require('../assets/images/language.png')}
+              />
+              <Text style={styles.text}>{t('change language')}</Text>
+            </View>
           </TouchableOpacity>
           <Modal
-          transparent={true}
-          animationType='fade'
-          visible={ischangeLanguageModalVisible}
-          onValueChange={()=>changeLanguageModalVisible(false)} >
-            <ChangeLanguageModal changeLanguageModalVisible={changeLanguageModalVisible}/>
+            transparent={true}
+            animationType="fade"
+            visible={ischangeLanguageModalVisible}
+            onValueChange={() => changeLanguageModalVisible(false)}>
+            <ChangeLanguageModal
+              changeLanguageModalVisible={changeLanguageModalVisible}
+            />
           </Modal>
 
-          <TouchableOpacity
-            onPress={() => signOutModalVisible(true)}
-            style={styles.square}>
-            <Text style={styles.text}>{t('logout')}</Text>
-          </TouchableOpacity>
+          <View style={{marginTop: -2}}>
+            <TouchableOpacity
+              onPress={() => signOutModalVisible(true)}
+              style={styles.square}>
+              <View style={styles.algin}>
+                <Image
+                  style={{width: 45, height: 45, marginTop: 10}}
+                  source={require('../assets/images/logout.png')}
+                />
+                <Text style={styles.text}>{t('logout')}</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
           <Modal
             transparent={true}
             onValueChange={() => signOutModalVisible(false)}
@@ -71,8 +95,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   square: {
-    paddingLeft :50,
-    borderWidth: 1.2,
+    paddingLeft: 50,
+    borderWidth: 1,
     backgroundColor: '#cab3f5',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
@@ -90,5 +114,9 @@ const styles = StyleSheet.create({
   },
   container3: {
     marginTop: 80,
+  },
+  algin: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
 });

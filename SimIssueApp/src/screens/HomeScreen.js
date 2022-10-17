@@ -17,7 +17,7 @@ export const HomeScreen = () => {
     React.useCallback(() => {
 
       const fetchData = async()=>{
-        await axios.get(`http://10.141.101.21:5000/api/issues/`)
+        await axios.get(`http://10.142.44.124:5000/api/issues/`)
         .then(rsp =>{
           !rsp.data.Error ?
           setIussues(rsp.data)
@@ -27,27 +27,10 @@ export const HomeScreen = () => {
         .catch(err=> console.log(err))
         setQueueNo( JSON.parse(await AsyncStorage.getItem('queueNo')))
       }
-
-
-      const onBackPress = () => {
-        
-        Alert.alert("", "Are you sure you want to Exit?", [
-          {
-            text: "Cancel",
-            onPress: () => null,
-            style: "cancel"
-          },
-          { text: "YES", onPress: () => BackHandler.exitApp() }
-        ]);
-        return true;
-      };
     
       fetchData()
-      BackHandler.addEventListener("hardwareBackPress", onBackPress);
-    
-      return () => {
-        BackHandler.removeEventListener("hardwareBackPress", onBackPress);
-      }
+      const backHandler = BackHandler.addEventListener("hardwareBackPress", ()=>BackHandler.exitApp());
+      return () => backHandler.remove()
     
     }, [setQueueNo]));
 
@@ -59,7 +42,7 @@ export const HomeScreen = () => {
   const addIssue = async(issueID , issue)=>{
     queueNo == null ?
       navigation.navigate('AddIssueScreen',{issueId: issueID, issueText: issue})
-      : toast.show('You have already Submitted an Issue!', {
+      : toast.show(t('you have already submitted an issue'), {
         type: 'warning ',
         placement: 'bottom',
         duration: 4000,
@@ -67,7 +50,6 @@ export const HomeScreen = () => {
         animationType: 'slide-in',
       });
     
-
   }
   
   return (
@@ -87,12 +69,12 @@ export const HomeScreen = () => {
       ) : (<View style={styles.container22}></View>)}
       
       <View style={styles.container3}>
-        <Card onPress={()=> addIssue(issues[0].id, issues[0].issue_type)} text={t('New Sim Request')}/>
-        <Card onPress={()=>addIssue(issues[1].id, issues[1].issue_type)} text={t('Sim Not Working')}/>
+        <Card name={"sim-card"} color={"purple"} size={100} onPress={()=> addIssue(issues[0].id, issues[0].issue_type)} text={t('new sim request')}/>
+        <Card  name={"times"} color={"purple"} size={100} onPress={()=>addIssue(issues[1].id, issues[1].issue_type)} text={t('sim not working')}/>
       </View>
       <View style={styles.container4}>
-        <Card onPress={()=>addIssue(issues[2].id, issues[2].issue_type)} text={t('Sim Registraion')}/>
-        <Card onPress={()=>addIssue(issues[3].id, issues[3].issue_type)} text={t('Other')}/>
+        <Card  name={"user-plus"} color={"purple"} size={80} onPress={()=>addIssue(issues[2].id, issues[2].issue_type)} text={t('sim registration')}/>
+        <Card  name={"question-circle"} color={"purple"} size={80} onPress={()=>addIssue(issues[3].id, issues[3].issue_type)} text={t('other')}/>
       </View>
 
     </View>
@@ -122,6 +104,8 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     width: 60,
     height: 60,
+    borderColor:'black',
+    borderWidth:1,
   },
   container2: {
     marginTop: 25,

@@ -10,7 +10,7 @@ export const Button = ({
 }) => {
   return (
     <View >
-        <TouchableOpacity style={styles.styleBtn} onPress={onPress} >
+        <TouchableOpacity style={[btnStyle, styles.button]} onPress={onPress} >
           <Text style={styles.btnText}>{title}</Text>
         </TouchableOpacity>
     </View>
@@ -18,16 +18,20 @@ export const Button = ({
 }
 
 const styles = StyleSheet.create({
-  styleBtn: {
-    height:40,
+  button: {
+    height:45,
     // width:150,
-    backgroundColor:'blue',
     alignItems:'center',
     justifyContent:'center',
     borderRadius:25,
     marginBottom:10,
-    marginLeft: 50,
-    marginRight: 50,
+    // marginLeft: 50,
+    // marginRight: 50,
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowOpacity: 0.8,
+    elevation: 6,
+    shadowRadius: 10 ,
+    shadowOffset : { width: 1, height: 5},
     
   },
   btnBorder: {

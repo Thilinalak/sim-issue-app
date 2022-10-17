@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
+  ScrollView,
 } from 'react-native';
 import {Header} from '../components/Header';
 import {Button} from '../components/Button';
@@ -17,7 +18,7 @@ import {useNavigation} from '@react-navigation/native';
 export const AddIssueScreen = ({route}) => {
 
   useEffect(() => {
-    setIssueType(route.params.issueText);
+    setIssueType(t(route.params.issueText));
     setIssueTypeId(route.params.issueId);
   }, [route]);
 
@@ -31,7 +32,7 @@ export const AddIssueScreen = ({route}) => {
 
   const onSubmit = async () => {
     if (issue.trim().length == 0) {
-      toast.show('Please enter your issue first !', {
+      toast.show(t('please enter your issue first'), {
         type: 'danger',
         placement: 'bottom',
         duration: 4000,
@@ -42,7 +43,7 @@ export const AddIssueScreen = ({route}) => {
       try {
         const userData = JSON.parse(await AsyncStorage.getItem('userData'));
         await axios
-          .post(`http://10.141.101.21:5000/api/issues/add-issue`, {
+          .post(`http://10.142.44.124:5000/api/issues/add-issue`, {
             userId: userData.user.id,
             issueTypeId,
             issue,
@@ -53,7 +54,7 @@ export const AddIssueScreen = ({route}) => {
             if (!res.data.error) {
               await AsyncStorage.setItem('queueNo' ,JSON.stringify(res.data.queueNo))
               await AsyncStorage.setItem('issueId' ,JSON.stringify(res.data.issueId))
-              toast.show(res.data.message, {
+              toast.show(t(res.data.message), {
                 type: 'success',
                 placement: 'bottom',
                 duration: 4000,
@@ -62,7 +63,7 @@ export const AddIssueScreen = ({route}) => {
               });
               navigation.navigate('HomeScreen')
             } else {
-              toast.show(res.data.error, {
+              toast.show(t(res.data.error), {
                 type: 'danger',
                 placement: 'bottom',
                 duration: 4000,
@@ -82,6 +83,7 @@ export const AddIssueScreen = ({route}) => {
       <View>
         <Header />
       </View>
+      
       <View style={styles.container2}>
         <Text style={styles.textStyle}>{t('issue type')}</Text>
         <View>
@@ -90,7 +92,9 @@ export const AddIssueScreen = ({route}) => {
           </TouchableOpacity>
         </View>
       </View>
+      <ScrollView>
       <View style={styles.container3}>
+        
         <Text style={styles.textStyle}>{t('remark')}</Text>
         <TextInput
           style={styles.textArea}
@@ -102,10 +106,12 @@ export const AddIssueScreen = ({route}) => {
           maxLength={255}
           placeholder={t('add issue here')}
         />
+        
       </View>
       <View style={styles.container4}>
-        <Button onPress={onSubmit} title={t('submit')} />
+        <Button btnStyle={styles.button} onPress={onSubmit} title={t('submit')} />
       </View>
+      </ScrollView>
     </View>
   );
 };
@@ -116,10 +122,16 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderColor: '#323aa8',
     borderWidth: 1,
+    color: '#350c4d',
     fontSize: 16,
     padding: 10,
     textAlignVertical: 'top',
   },
+  button:{
+    width:200,
+    backgroundColor:'#b61fdb'
+  },
+
   container: {
     backgroundColor: '#eff556',
     flex: 1,
@@ -130,10 +142,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginTop: 20,
   },
+  buttonStyle: {
+    backgroundColor: '#1568ed',
+  },
   issueType: {
     color: '#ffffff',
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: 'bold',
+    alignSelf:"center"
   },
   roundCircle: {
     borderRadius: 25,
@@ -146,13 +162,13 @@ const styles = StyleSheet.create({
   },
   container2: {
     marginTop: 25,
+    marginBottom: 25,
   },
   container3: {
-    marginTop: 20,
+    marginTop: 1,
   },
   container4: {
     marginTop: 20,
-    marginLeft: 170,
-    marginRight: -45,
-  },
+    marginLeft: 235,
+    },
 });

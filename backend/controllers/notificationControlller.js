@@ -45,12 +45,11 @@ exports.getNotification = async(req, res)=>{
 // @Method  PUT
 // @Route   /api/notifications/issue-completed/:issueid
 exports.issueCompleted = async(req, res)=>{
-    console.log('got the Request');
+    
     const issueID = req.body.issueid
-   
     const updatedNotification  =  await notifications.update({isRead : true},{where:{ userIssueId: issueID}})
     
     updatedNotification ? 
-        res.status(200).json({message: 'Your Issue have been fiexd successfully Thank You!'})
-    :   res.status(200).json({error:'Your Issue still Proccessing'})    
+        res.status(200).json({message: 'Your Issue have been fixed successfully Thank You!'})
+    :   res.status(200).json({error:'Your Issue still Proccessing!'})    
 }

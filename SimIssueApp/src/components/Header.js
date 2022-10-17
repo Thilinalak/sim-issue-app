@@ -44,9 +44,8 @@ const styles = StyleSheet.create({
   },
   container: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
   },
   txtPosition: {
     marginTop:7,
-    marginRight:240  },
+    marginLeft:20  },
 });

@@ -140,6 +140,7 @@ android {
     ndkVersion rootProject.ext.ndkVersion
 
     compileSdkVersion rootProject.ext.compileSdkVersion
+    // compileSdkVersion 33
 
     defaultConfig {
         applicationId "com.simissueapp"
@@ -267,6 +268,7 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 implementation platform ("com.google.firebase:firebase-bom:30.2.0")
 implementation ("com.google.firebase:firebase-analytics")
+implementation project(':react-native-push-notification')
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
@@ -319,7 +321,7 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
-
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 def isNewArchitectureEnabled() {
     // To opt-in for the New Architecture, you can either:
     // - Set `newArchEnabled` to true inside the `gradle.properties` file

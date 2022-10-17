@@ -3,9 +3,8 @@ const db = require("../model");
 
 const IssueTypes = db.issueTypes;
 const UserIssues = db.userIssues;
-const User = db.users;
 
-// @Desc     Load issues types
+// @Desc     Load issues types to HomeScreen.js
 // @Method   GET
 // @Route    api/issues/
 exports.getIssues = async (req, res) => {
@@ -38,8 +37,8 @@ exports.addIssue = async (req, res) => {
     });
 
     addIssue
-      ? res.status(201).json({ message: "Your Issue Sumbited Successfully, We will contact you Soon!", queueNo:1 })
-      : res.status(200).json({ error: "Issue submit failed !" });
+      ? res.status(201).json({ message: "your issue sumbited successfully, we will contact you soon", queueNo:1 })
+      : res.status(200).json({ error: "issue submit failed" });
   } else {
     const lastone = JSON.parse(JSON.stringify(lastIssue));
 
@@ -51,7 +50,7 @@ exports.addIssue = async (req, res) => {
       issueTypeId,
     });
     addIssue
-      ? res.status(201).json({ message: "Your Issue Sumbit Successfully, We will contact you Soon!", queueNo:lastone[0].ongoing_queue_no + 1, issueId:addIssue.id })
-      : res.status(200).json({ error: "Issue submit failed !" });
+      ? res.status(201).json({ message: "your issue sumbited successfully, we will contact you soon", queueNo:lastone[0].ongoing_queue_no + 1, issueId:addIssue.id })
+      : res.status(200).json({ error: "issue submit failed" });
   }
 };

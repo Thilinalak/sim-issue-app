@@ -4,13 +4,14 @@ import { View ,StyleSheet, Text, TouchableOpacity, Alert } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios'
 import { useToast } from 'react-native-toast-notifications';
+import { useTranslation } from 'react-i18next';
 
 export const Notification = ({issueid,notificationText}) => {
 
   const IssueCompleted = async()=>{
     try {
        const userData = JSON.parse(await AsyncStorage.getItem('userData'))
-      await axios.put(`http://10.141.101.21:5000/api/notifications/issue-completed`,{issueid},
+      await axios.put(`http://10.142.44.124:5000/api/notifications/issue-completed`,{issueid},
       {'headers':{
         Authorization: `Bearer ${userData.userToken}`
       }}
@@ -19,12 +20,12 @@ export const Notification = ({issueid,notificationText}) => {
           if(!resp.data.error){
             await AsyncStorage.removeItem('issueId')
             await AsyncStorage.removeItem('queueNo')
-            Alert.alert("", resp.data.message, [
+            Alert.alert("", t(resp.data.message), [
               { text: "OK", onPress: () =>  navigation.navigate('HomeScreen') }
             ]);
             
           }else{
-            toast.show(resp.data.error,{
+            toast.show(t(resp.data.error),{
               type:'danger',
               placement:'bottom',
               animationType:'slide-in',
@@ -43,6 +44,7 @@ export const Notification = ({issueid,notificationText}) => {
 
   const navigation = useNavigation()
   const toast = useToast()
+  const {t ,i18n} = useTranslation()
   return (
     <View>
          <TouchableOpacity onPress={()=> IssueCompleted()} style={styles.oval}>
@@ -61,6 +63,7 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         width: window.width,
         height: 90,
+        paddingLeft:20
       },
       text:{
         margin:20,
