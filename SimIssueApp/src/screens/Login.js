@@ -1,15 +1,14 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, View, Text,  TextInput, Image, BackHandler} from 'react-native';
+import {StyleSheet, View, Text, Image, BackHandler} from 'react-native';
 import {Button} from '../components/Button';
-import {MyTextInput} from '../components/MyTextInput';
-import {useFocusEffect} from '@react-navigation/native'
 import {useTranslation} from 'react-i18next';
 import axios from 'axios';
 import {useToast} from 'react-native-toast-notifications';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import { CustomTextInput } from '../components/CustomTextInput';
+import {IP_ADDRESS} from '@env'
+
 
 const Login = () => {
 
@@ -39,7 +38,7 @@ const Login = () => {
       });
     } else {
       axios
-        .post('http://10.142.44.124:5000/api/users/login', {username, password})
+        .post(`http://${IP_ADDRESS}:5000/api/users/login`, {username, password})
         .then(async res => {
           if (!res.data.Error) {
             try {

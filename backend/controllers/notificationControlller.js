@@ -1,4 +1,4 @@
-const {notifications} = require('../model')
+const {notifications, userIssues} = require('../model')
 
 // @Desc    Add notification
 // @Method  POST
@@ -28,7 +28,6 @@ exports.addNotification  = async(req, res)=>{
 // @Route   /api/notifications/get-notification/:notificationid
 exports.getNotification = async(req, res)=>{
 
-
     const notificationId = req.params.notificationid
 
     const allNotifications = await notifications.findAll({
@@ -48,8 +47,9 @@ exports.issueCompleted = async(req, res)=>{
     
     const issueID = req.body.issueid
     const updatedNotification  =  await notifications.update({isRead : true},{where:{ userIssueId: issueID}})
+    const updateUserIssue = await userIssues.update({isIssueComplete: true}, {where:{id:issueID}})
     
-    updatedNotification ? 
+    updatedNotification || updateUserIssue ? 
         res.status(200).json({message: 'Your Issue have been fixed successfully Thank You!'})
     :   res.status(200).json({error:'Your Issue still Proccessing!'})    
 }

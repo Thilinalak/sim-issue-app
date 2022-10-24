@@ -6,6 +6,8 @@ import {Notification} from '../components/Notification';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
+import {IP_ADDRESS}  from '@env'
+
 
 export const NotificationScreen = () => {
 
@@ -20,7 +22,7 @@ export const NotificationScreen = () => {
           setIssueid(issueID)
           await axios
             .get(
-              `http://10.142.44.124:5000/api/notifications/get-notification/${issueID}`,
+              `http://${IP_ADDRESS}:5000/api/notifications/get-notification/${issueID}`,
               {'headers' : {Authorization: `Bearer ${userData.userToken}`}}
             )
             .then(resp => {

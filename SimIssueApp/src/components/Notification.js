@@ -5,13 +5,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios'
 import { useToast } from 'react-native-toast-notifications';
 import { useTranslation } from 'react-i18next';
+import {IP_ADDRESS} from '@env'
 
 export const Notification = ({issueid,notificationText}) => {
 
   const IssueCompleted = async()=>{
     try {
        const userData = JSON.parse(await AsyncStorage.getItem('userData'))
-      await axios.put(`http://10.142.44.124:5000/api/notifications/issue-completed`,{issueid},
+      await axios.put(`http://${IP_ADDRESS}:5000/api/notifications/issue-completed`,{issueid},
       {'headers':{
         Authorization: `Bearer ${userData.userToken}`
       }}

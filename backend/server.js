@@ -16,6 +16,8 @@ app.use('/api/users', require('./routes/userRoutes'))
 app.use('/api/issues', require('./routes/issueRoutes'))
 //  notification routes
 app.use('/api/notifications', require('./routes/notificationRoutes'))
+//  fcmnotification routes
+app.use('/api/fcm-notifications',require('./routes/fcmNotificationRoutes'))
 
 
 app.listen(port, () => console.log(`Server Running on Port ${port}...`))

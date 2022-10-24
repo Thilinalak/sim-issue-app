@@ -13,13 +13,13 @@ import notifee, { AndroidImportance } from '@notifee/react-native';
 // Register background handler
 messaging().setBackgroundMessageHandler(async remoteMessage => {
   notifficationCount(remoteMessage)
-    console.log('Message handled in the background!!!!!!', remoteMessage);
+    console.log('Message handled in the background!', remoteMessage);
   });
 
   messaging().onMessage(async remoteMessage => {
     notifficationCount(remoteMessage)
     onDisplayNotification(remoteMessage)
-    console.log('A new FCM message arrivedtttt!', JSON.stringify(remoteMessage));
+    console.log('A new FCM message arrived!', JSON.stringify(remoteMessage));
   });
 
   const notifficationCount = async(remoteMessage)=>{
@@ -53,7 +53,7 @@ messaging().setBackgroundMessageHandler(async remoteMessage => {
       android: {
         channelId,
         smallIcon: 'ic_launcher', // optional, defaults to 'ic_launcher'.
-        // // pressAction is needed if you want the notification to open the app when pressed
+        // pressAction is needed if you want the notification to open the app when pressed
         pressAction: {
           id: 'default',
         },

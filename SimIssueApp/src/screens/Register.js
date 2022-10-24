@@ -6,6 +6,8 @@ import {Button} from '../components/Button';
 import {useTranslation} from 'react-i18next';
 import {useToast} from 'react-native-toast-notifications';
 import { CustomTextInput } from '../components/CustomTextInput';
+import {IP_ADDRESS}  from '@env'
+
 
 const Register = () => {
 
@@ -57,7 +59,7 @@ const Register = () => {
       });
     } else {
       axios
-        .post('http://10.142.44.124:5000/api/users/register', {
+        .post(`http://${IP_ADDRESS}:5000/api/users/register`, {
           fullname,
           mobile,
           email,
@@ -199,17 +201,6 @@ const style = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
     paddingTop:0
-  },
-  input: {
-    height: 50,
-    marginBottom: 12,
-    borderWidth: 1,
-    borderRadius:50,
-    paddingLeft: 20,
-    paddingRight: 20,
-    fontSize: 18,
-    color:'black',
-    borderColor:'blue',
   },
 });
 

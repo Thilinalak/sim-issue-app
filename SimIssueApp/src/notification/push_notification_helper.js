@@ -1,4 +1,3 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import messaging from '@react-native-firebase/messaging';
 
 exports.requestUserPermission = async () => {
@@ -16,13 +15,11 @@ exports.requestUserPermission = async () => {
 const getFCMToken = async () => {
  
   let fcmtokenn = await messaging().getToken();
-      console.log('new message token ', fcmtokenn);
+      console.log('FCM token ', fcmtokenn);
 
 };
 
 exports.NotificationListner = async() => {
-
-  
 
   messaging().onNotificationOpenedApp(remoteMessage => {
     console.log(

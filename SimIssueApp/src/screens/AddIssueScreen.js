@@ -14,6 +14,8 @@ import {useToast} from 'react-native-toast-notifications';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
+import {IP_ADDRESS} from '@env'
+
 
 export const AddIssueScreen = ({route}) => {
 
@@ -43,7 +45,7 @@ export const AddIssueScreen = ({route}) => {
       try {
         const userData = JSON.parse(await AsyncStorage.getItem('userData'));
         await axios
-          .post(`http://10.142.44.124:5000/api/issues/add-issue`, {
+          .post(`http://${IP_ADDRESS}:5000/api/issues/add-issue`, {
             userId: userData.user.id,
             issueTypeId,
             issue,

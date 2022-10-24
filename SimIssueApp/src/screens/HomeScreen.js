@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import axios from 'axios';
 import {useToast} from 'react-native-toast-notifications';
+import {IP_ADDRESS}  from '@env'
 
 export const HomeScreen = () => {
 
@@ -17,7 +18,7 @@ export const HomeScreen = () => {
     React.useCallback(() => {
 
       const fetchData = async()=>{
-        await axios.get(`http://10.142.44.124:5000/api/issues/`)
+        await axios.get(`http://${IP_ADDRESS}:5000/api/issues/`)
         .then(rsp =>{
           !rsp.data.Error ?
           setIussues(rsp.data)
