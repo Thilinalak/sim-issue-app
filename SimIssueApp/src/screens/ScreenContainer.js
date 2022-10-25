@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React, { useState} from 'react';
+import {StyleSheet} from 'react-native';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useTranslation} from 'react-i18next';
-import notifee from '@notifee/react-native';
 
 // Screens
 import {HomeScreen} from './HomeScreen';
@@ -58,10 +57,9 @@ export const ScreenContainer = () => {
 
   let [notificationCount, setNotificationCount] = useState(null);
   const {t, i18n} = useTranslation();
-  let ncounnt = 22;
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName={t('home')}
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, color, size}) => {
           let iconName;

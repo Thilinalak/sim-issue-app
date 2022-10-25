@@ -23,7 +23,10 @@ export const SignOutModal = (props) => {
         try {
 
             await AsyncStorage.removeItem('userData')
-            navigation.navigate('Login')
+            navigation.reset({
+                index:0,
+                routes:[{name:'Login'}]
+            })
         } catch (err) {
             console.log(err);
         }

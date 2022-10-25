@@ -8,9 +8,9 @@ admin.initializeApp({
 });
 
 
-// @Desc    send notifications to all devices
-// Method   POST
-// Route    api/fcm-notifications/send-notification
+// @Desc     send notifications to all devices
+// @Method   POST
+// @Route    api/fcm-notifications/send-notification
 exports.notification = async(req, res)=>{
 
     const {registrationToken,title, body} = req.body
@@ -36,9 +36,9 @@ exports.notification = async(req, res)=>{
 
 } 
 
-// @Desc    Save Device's FCM Token. SplashScreen.js
-// Method   POST
-// Route    api/fcm-notifications/save-fcmtoken
+// @Desc     Save Device's FCM Token. SplashScreen.js
+// @Method   POST
+// @Route    api/fcm-notifications/save-fcmtoken
 exports.saveFCMToken = async(req, res)=>{
 
     const {userid, fcmToken}  = req.body.dataInfo
